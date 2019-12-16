@@ -138,8 +138,17 @@ function get3rdCar(inventory) {
  * For example, if getCarInfoByIndex is invoked with the inventory and the number 0,
  * it will return `This is a Lincoln Navigator`.
  */
+// function getCarInfoByIndex(inventory, index) {
+//   let car = inventory.find((c, i) => i === index);
+//   return `This is a ${car.car_make} ${car.car_model}`;
+// }
 function getCarInfoByIndex(inventory, index) {
-  let car = inventory.find((c, i) => i === index);
+  let car;
+  for (let i = 0; i < inventory.length; i++) {
+    if (i === index) {
+      car = inventory[i];
+    }
+  }
   return `This is a ${car.car_make} ${car.car_model}`;
 }
 
@@ -171,8 +180,19 @@ function getLastCarInfo(arr) {
  * For example, if getCarInfoById is invoked with the inventory and the number 1,
  * it will return `This is a Lincoln Navigator`.
  */
+
+// function getCarInfoById(arr, id) {
+//   let car = arr.find(c => c.id === id);
+//   return `This is a ${car.car_make} ${car.car_model}`;
+// }
+
 function getCarInfoById(arr, id) {
-  let car = arr.find(c => c.id === id);
+  let car;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].id === id) {
+      car = arr[i];
+    }
+  }
   return `This is a ${car.car_make} ${car.car_model}`;
 }
 
@@ -184,9 +204,10 @@ function getCarInfoById(arr, id) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
  */
+
 function sortCarInventory(arr) {
   return arr.sort((a, b) => {
-    return a.car_model > b.car_model ?  1 : -1
+    return a.car_model > b.car_model ? 1 : -1;
   });
 }
 
@@ -199,8 +220,17 @@ function sortCarInventory(arr) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * getModelYears returns an array containing all the 'car_year's in the inventory.
  */
+
+// function getModelYears(arr) {
+//   return arr.map(c => c.car_year)
+// }
+
 function getModelYears(arr) {
-  return arr.map(c => c.car_year)
+  let years = [];
+  for (let i = 0; i < arr.length; i++) {
+    years.push(arr[i].car_year);
+  }
+  return years;
 }
 
 /**
@@ -215,9 +245,20 @@ function getModelYears(arr) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
  */
+
+// function getOlderCars(arr, year) {
+//   return arr.filter(car => car.car_year <= year)
+
+// }
+
 function getOlderCars(arr, year) {
-  return arr.filter(car => car.car_year <= year)
-  
+  let old = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].car_year <= year) {
+      old.push(arr[i]);
+    }
+  }
+  return old;
 }
 
 /**
@@ -231,8 +272,30 @@ function getOlderCars(arr, year) {
  * made by either `Audi` or `Mercedes-Benz` or `Volkswagen` or `BMW`,
  * in the same order as they appear in the original inventory.
  */
+
+// function getGermanCars(arr) {
+//   return arr.filter(
+//     car =>
+//       car.car_make === 'Audi' ||
+//       car.car_make === 'Mercedes-Benz' ||
+//       car.car_make === 'Volkswagen' ||
+//       car.car_make === 'BMW'
+//   );
+// }
+
 function getGermanCars(arr) {
-  return arr.filter(car => car.car_make === 'Audi' || car.car_make === 'Mercedes-Benz' || car.car_make === 'Volkswagen' || car.car_make === 'BMW')
+  let german = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (
+      arr[i].car_make === 'Audi' ||
+      arr[i].car_make === 'Mercedes-Benz' ||
+      arr[i].car_make === 'Volkswagen' ||
+      arr[i].car_make === 'BMW'
+    ) {
+      german.push(arr[i]);
+    }
+  }
+  return german;
 }
 
 /**
@@ -253,9 +316,9 @@ function getGermanCars(arr) {
  *   return num * 2
  * }
  */
-const sum = (a, b) => a + b
-const addFive = num => num + 5
-const argTimesTwo = num => num * 2
+const sum = (a, b) => a + b;
+const addFive = num => num + 5;
+const argTimesTwo = num => num * 2;
 
 /**
  * ### Challenge `carMaker`
@@ -271,10 +334,10 @@ const argTimesTwo = num => num * 2
  *         (2) returns the updated value of the `odometer`.
  */
 function carMaker(num) {
-  const obj = {}
-  obj.odometer = num
-  obj.drive = (dist) => obj.odometer += dist
-  return obj
+  const obj = {};
+  obj.odometer = num;
+  obj.drive = dist => (obj.odometer += dist);
+  return obj;
 }
 
 /// ////// END OF CHALLENGE /////////
